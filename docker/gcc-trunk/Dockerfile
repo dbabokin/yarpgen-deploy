@@ -16,4 +16,4 @@ RUN mkdir build && mkdir bin
 WORKDIR /usr/local/gcc/src
 RUN git log --format="%H" -n 1 > ../rev.txt
 RUN contrib/download_prerequisites
-RUN CPU_CORES=`cat /proc/cpuinfo |grep processor |wc -l` contrib/gcc_build -d $GCC_HOME/src -o $GCC_HOME/build -c "--enable-multilib --prefix=$GCC_HOME/bin" -m -j$CPU_CORES configure build install
+RUN CPU_CORES=1 contrib/gcc_build -d $GCC_HOME/src -o $GCC_HOME/build -c "--enable-multilib --prefix=$GCC_HOME/bin" -m -j$CPU_CORES configure build install
