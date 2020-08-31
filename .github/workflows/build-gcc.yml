@@ -1,0 +1,27 @@
+name: Build GCC
+
+on:
+  push:
+
+jobs:
+  gcc-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Check environment
+      run: |
+        cat /proc/cpuinfo
+
+    - name: Build and push GCC image
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        dockerfile: docker/gcc-trunk
+        path: docker/gcc-trunk
+        repository: dbabokin/yarpgen-gcc
+        tags: latest
